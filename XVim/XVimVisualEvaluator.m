@@ -276,12 +276,7 @@ static NSString* MODE_STRINGS[] = {@"", @"-- VISUAL --", @"-- VISUAL LINE --", @
 }
 
 - (XVimEvaluator*)C_v{
-	NSTextView *view = [self sourceView];
-    if( view.selectionMode == XVIM_VISUAL_BLOCK){
-        return  [self ESC];
-    }
-    [view xvim_changeSelectionMode:XVIM_VISUAL_BLOCK];
-    return self;
+    return [self ESC];
 }
 
 - (XVimEvaluator*)x{

@@ -172,10 +172,10 @@
     return nil;
 }
 
-- (XVimEvaluator*)i{
+/*- (XVimEvaluator*)i{
     // Go to insert 
     return [[[XVimInsertEvaluator alloc] initWithWindow:self.window] autorelease];
-}
+}*/
 
 - (XVimEvaluator*)I{
     [[self sourceView] xvim_insertBeforeFirstNonblank];
@@ -212,10 +212,10 @@
     return nil;
 }
 
-- (XVimEvaluator*)C_i{
+/*- (XVimEvaluator*)C_i{
     [NSApp sendAction:@selector(goForwardInHistoryByCommand:) to:nil from:self];
     return nil;
-}
+}*/
 
 - (XVimEvaluator*)p{
     NSTextView* view = [self sourceView];
@@ -312,11 +312,12 @@
 }
 
 - (XVimEvaluator*)C_v{
-    if( XVim.instance.isRepeating ){
+    /*if( XVim.instance.isRepeating ){
         return [[[XVimVisualEvaluator alloc] initWithLastVisualStateWithWindow:self.window] autorelease];
     }else{
         return [[[XVimVisualEvaluator alloc] initWithWindow:self.window mode:XVIM_VISUAL_BLOCK]  autorelease];
-    }
+    }*/
+    return [[[XVimInsertEvaluator alloc] initWithWindow:self.window] autorelease];
 }
 
 - (XVimEvaluator*)C_w{

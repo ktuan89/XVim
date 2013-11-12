@@ -221,17 +221,17 @@
     return [self _motionFixed:XVIM_MAKE_MOTION(MOTION_HOME, LINEWISE, MOTION_OPTION_NONE, [self numericArg])];
 }
 
-- (XVimEvaluator*)j{
+/*- (XVimEvaluator*)j{
     return [self _motionFixed:XVIM_MAKE_MOTION(MOTION_LINE_FORWARD, LINEWISE, MOTION_OPTION_NONE, [self numericArg])];
-}
+}*/
 
-- (XVimEvaluator*)k{
+/*- (XVimEvaluator*)k{
     return [self _motionFixed:XVIM_MAKE_MOTION(MOTION_LINE_BACKWARD, LINEWISE, MOTION_OPTION_NONE, [self numericArg])];
-}
+}*/
 
-- (XVimEvaluator*)l{
+/*- (XVimEvaluator*)l{
     return [self _motionFixed:XVIM_MAKE_MOTION(MOTION_FORWARD, CHARACTERWISE_EXCLUSIVE, LEFT_RIGHT_NOWRAP, [self numericArg])];
-}
+}*/
 
 - (XVimEvaluator*)L{
     return [self _motionFixed:XVIM_MAKE_MOTION(MOTION_BOTTOM, LINEWISE, MOTION_OPTION_NONE, [self numericArg])];
@@ -577,18 +577,54 @@
     return [XVimEvaluator invalidEvaluator];
 }
 
+- (XVimEvaluator*)j{
+  // return [self _motionFixed:XVIM_MAKE_MOTION(MOTION_LINE_FORWARD, LINEWISE, MOTION_OPTION_NONE, [self numericArg])];
+  return [self _motionFixed:XVIM_MAKE_MOTION(MOTION_BACKWARD, CHARACTERWISE_EXCLUSIVE, LEFT_RIGHT_NOWRAP, [self numericArg])];
+}
+
+- (XVimEvaluator*)k{
+  // return [self _motionFixed:XVIM_MAKE_MOTION(MOTION_LINE_BACKWARD, LINEWISE, MOTION_OPTION_NONE, [self numericArg])];
+  return [self _motionFixed:XVIM_MAKE_MOTION(MOTION_LINE_FORWARD, LINEWISE, MOTION_OPTION_NONE, [self numericArg])];
+}
+
+- (XVimEvaluator*)l{
+  return [self _motionFixed:XVIM_MAKE_MOTION(MOTION_FORWARD, CHARACTERWISE_EXCLUSIVE, LEFT_RIGHT_NOWRAP, [self numericArg])];
+}
+
+- (XVimEvaluator*)i{
+  return [self _motionFixed:XVIM_MAKE_MOTION(MOTION_LINE_BACKWARD, LINEWISE, MOTION_OPTION_NONE, [self numericArg])];
+}
+
+- (XVimEvaluator*)C_j{
+  return [self _motionFixed:XVIM_MAKE_MOTION(MOTION_FIRST_NONBLANK, CHARACTERWISE_EXCLUSIVE, MOTION_OPTION_NONE, [self numericArg])];
+}
+
+- (XVimEvaluator*)C_l{
+  return [self _motionFixed:XVIM_MAKE_MOTION(MOTION_END_OF_LINE, CHARACTERWISE_EXCLUSIVE, MOTION_OPTION_NONE, [self numericArg])];
+}
+
+/* ktuan */
+- (XVimEvaluator*)C_k{
+  [[self sourceView] xvim_scrollHalfPageForward:[self numericArg]];
+  return nil;
+}
+
+- (XVimEvaluator*)C_i{
+  [[self sourceView] xvim_scrollHalfPageBackward:[self numericArg]];
+  return nil;
+}
 
 
 - (XVimEvaluator*)Up{
-    return [self k];
+    return [self i];
 }
 
 - (XVimEvaluator*)Down{
-    return [self j];
+    return [self k];
 }
 
 - (XVimEvaluator*)Left{
-    return [self h];
+    return [self j];
 }
 
 - (XVimEvaluator*)Right{
