@@ -599,12 +599,12 @@
         }
         
         // If the next position is newline and not a blankline skip it
-        if (isNewline([string characterAtIndex:next])) {
+        /*if (isNewline([string characterAtIndex:next])) {
             if(![self isBlankline:next]) {
                 // skip the newline letter at the end of line
                 next++;
             }
-        }
+        }*/
         pos = next;
     }   
     return pos;

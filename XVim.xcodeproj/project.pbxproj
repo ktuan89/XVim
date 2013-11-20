@@ -149,6 +149,8 @@
 		A2F4A33E14F00B25006DA5A5 /* XVimNormalEvaluator.m in Sources */ = {isa = PBXBuildFile; fileRef = A2F4A33D14F00B25006DA5A5 /* XVimNormalEvaluator.m */; };
 		A2F4A34314F00BD3006DA5A5 /* XVimVisualEvaluator.m in Sources */ = {isa = PBXBuildFile; fileRef = A2F4A34214F00BD3006DA5A5 /* XVimVisualEvaluator.m */; };
 		A2FF17D11502B292003FE648 /* XVimMotionEvaluator.m in Sources */ = {isa = PBXBuildFile; fileRef = A2FF17D01502B291003FE648 /* XVimMotionEvaluator.m */; };
+		B88E61E518321285009B6C27 /* XVimKtuanEvaluator.m in Sources */ = {isa = PBXBuildFile; fileRef = B88E61E418321285009B6C27 /* XVimKtuanEvaluator.m */; };
+		B88E61E618321285009B6C27 /* XVimKtuanEvaluator.m in Sources */ = {isa = PBXBuildFile; fileRef = B88E61E418321285009B6C27 /* XVimKtuanEvaluator.m */; };
 		BF07A94215EBF404006E6984 /* NSEvent+VimHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BF050D7A15EBF3E100CD0D12 /* NSEvent+VimHelper.m */; };
 		C308865A1554C8380024161D /* NSInsetTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = C30886591554C8380024161D /* NSInsetTextView.m */; };
 		C324BE0115390E8500C13558 /* XVimGVisualEvaluator.m in Sources */ = {isa = PBXBuildFile; fileRef = C324BE0015390E8500C13558 /* XVimGVisualEvaluator.m */; };
@@ -321,6 +323,8 @@
 		A2F4A34214F00BD3006DA5A5 /* XVimVisualEvaluator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XVimVisualEvaluator.m; path = XVim/XVimVisualEvaluator.m; sourceTree = SOURCE_ROOT; };
 		A2FF17CF1502B291003FE648 /* XVimMotionEvaluator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XVimMotionEvaluator.h; path = XVim/XVimMotionEvaluator.h; sourceTree = SOURCE_ROOT; };
 		A2FF17D01502B291003FE648 /* XVimMotionEvaluator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XVimMotionEvaluator.m; path = XVim/XVimMotionEvaluator.m; sourceTree = SOURCE_ROOT; };
+		B88E61E318321285009B6C27 /* XVimKtuanEvaluator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XVimKtuanEvaluator.h; sourceTree = SOURCE_ROOT; };
+		B88E61E418321285009B6C27 /* XVimKtuanEvaluator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XVimKtuanEvaluator.m; sourceTree = SOURCE_ROOT; };
 		BF050D7915EBF3E100CD0D12 /* NSEvent+VimHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "NSEvent+VimHelper.h"; path = "XVim/NSEvent+VimHelper.h"; sourceTree = SOURCE_ROOT; };
 		BF050D7A15EBF3E100CD0D12 /* NSEvent+VimHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "NSEvent+VimHelper.m"; path = "XVim/NSEvent+VimHelper.m"; sourceTree = SOURCE_ROOT; };
 		C30886581554C8380024161D /* NSInsetTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSInsetTextView.h; path = XVim/NSInsetTextView.h; sourceTree = SOURCE_ROOT; };
@@ -600,6 +604,8 @@
 		A2F4A34014F00B35006DA5A5 /* Event Handlers(Evaluators) */ = {
 			isa = PBXGroup;
 			children = (
+				B88E61E318321285009B6C27 /* XVimKtuanEvaluator.h */,
+				B88E61E418321285009B6C27 /* XVimKtuanEvaluator.m */,
 				C34490D0154280CA00F60E09 /* Argument */,
 				C324BDFD15390E1600C13558 /* MotionArgument */,
 				A222B5E31514DFD5005E8802 /* Operators */,
@@ -857,6 +863,7 @@
 				A28F423517EEDBC200A3F7AE /* XVimMotionEvaluator.m in Sources */,
 				A28F423617EEDBC200A3F7AE /* XVimZEvaluator.m in Sources */,
 				A28F423717EEDBC200A3F7AE /* XVimEqualEvaluator.m in Sources */,
+				B88E61E618321285009B6C27 /* XVimKtuanEvaluator.m in Sources */,
 				A28F423817EEDBC200A3F7AE /* XVimRegister.m in Sources */,
 				A28F423917EEDBC200A3F7AE /* XVimRegisterEvaluator.m in Sources */,
 				A28F423A17EEDBC200A3F7AE /* XVimOperatorEvaluator.m in Sources */,
@@ -938,6 +945,7 @@
 				A2FF17D11502B292003FE648 /* XVimMotionEvaluator.m in Sources */,
 				F1F2426D15041A9B00F706A4 /* XVimZEvaluator.m in Sources */,
 				F1C1E515150475ED0005C1CB /* XVimEqualEvaluator.m in Sources */,
+				B88E61E518321285009B6C27 /* XVimKtuanEvaluator.m in Sources */,
 				F17D013B150861DC00A8111B /* XVimRegister.m in Sources */,
 				F100DC2E150BB6BC002C703C /* XVimRegisterEvaluator.m in Sources */,
 				A222B5E11514DFCD005E8802 /* XVimOperatorEvaluator.m in Sources */,

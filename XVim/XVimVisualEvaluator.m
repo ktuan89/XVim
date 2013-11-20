@@ -153,11 +153,11 @@ static NSString* MODE_STRINGS[] = {@"", @"-- VISUAL --", @"-- VISUAL LINE --", @
 
 // TODO: There used to be "b:" and "B:" methods here. Take a look how they have been.
 
-- (XVimEvaluator*)i{
+/*- (XVimEvaluator*)i{
     self.onChildCompleteHandler = @selector(onComplete_ai:);
     [self.argumentString appendString:@"i"];
     return [[[XVimTextObjectEvaluator alloc] initWithWindow:self.window inner:YES] autorelease];
-}
+}*/
 
 
 - (XVimEvaluator*)onComplete_ai:(XVimTextObjectEvaluator*)childEvaluator{

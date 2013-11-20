@@ -220,8 +220,10 @@
     XVimEvaluator *nextEvaluator = self;
     SEL keySelector = [keyStroke selectorForInstance:self];
     if (keySelector){
+      NSLog(@"Got selector");
         nextEvaluator = [self performSelector:keySelector];
     }else if(self.movementKeyPressed){
+      NSLog(@"Movement key pressed");
         // Flag movement key as not pressed until the next movement key is pressed
         self.movementKeyPressed = NO;
         
@@ -230,20 +232,25 @@
     }
     
     if (nextEvaluator == self && nil == keySelector){
+      NSLog(@"Here 1");
         NSEvent *event = [keyStroke toEventwithWindowNumber:0 context:nil];
         if (_oneCharMode) {
+          NSLog(@"One char mode");
             if( ![self.sourceView xvim_replaceCharacters:keyStroke.character count:[self numericArg]] ){
                 nextEvaluator = [XVimEvaluator invalidEvaluator];
             }else{
                 nextEvaluator = nil;
             }
         } else if ([self windowShouldReceive:keySelector]) {
+          NSLog(@"Here 2");
             // Here we pass the key input to original text view.
             // The input coming to this method is already handled by "Input Method"
             // and the input maight be non ascii like 'あ'
             if( keyStroke.modifier == 0 && isPrintable(keyStroke.character)){
+              NSLog(@"Here 3");
                 [self.sourceView insertText:keyStroke.xvimString];
             }else{
+              NSLog(@"Here 4");
                 [self.sourceView interpretKeyEvents:[NSArray arrayWithObject:event]];
             }
         }
@@ -308,11 +315,11 @@
 }
 
 - (XVimEvaluator*)C_j{
-  return [self _motionFixed:XVIM_MAKE_MOTION(MOTION_BACKWARD, CHARACTERWISE_EXCLUSIVE, LEFT_RIGHT_NOWRAP, [self numericArg])];
+  return [self _motionFixed:XVIM_MAKE_MOTION(MOTION_BACKWARD, CHARACTERWISE_EXCLUSIVE, LEFT_RIGHT_WRAP, [self numericArg])];
 }
 
 - (XVimEvaluator*)C_l{
-  return [self _motionFixed:XVIM_MAKE_MOTION(MOTION_FORWARD, CHARACTERWISE_EXCLUSIVE, LEFT_RIGHT_NOWRAP, [self numericArg])];
+  return [self _motionFixed:XVIM_MAKE_MOTION(MOTION_FORWARD, CHARACTERWISE_EXCLUSIVE, LEFT_RIGHT_WRAP, [self numericArg])];
 }
 
 /* ktuan */

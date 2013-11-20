@@ -182,10 +182,10 @@
     return [[[XVimInsertEvaluator alloc] initWithWindow:self.window] autorelease];
 }
 
-- (XVimEvaluator*)J{
+/*- (XVimEvaluator*)J{
     XVimJoinEvaluator* eval = [[[XVimJoinEvaluator alloc] initWithWindow:self.window] autorelease];
     return [eval executeOperationWithMotion:XVIM_MAKE_MOTION(MOTION_NONE, CHARACTERWISE_EXCLUSIVE, MOTION_OPTION_NONE, self.numericArg)];
-}
+}*/
 
 // Should be moved to XVimMotionEvaluator
 

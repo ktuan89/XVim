@@ -233,9 +233,9 @@
     return [self _motionFixed:XVIM_MAKE_MOTION(MOTION_FORWARD, CHARACTERWISE_EXCLUSIVE, LEFT_RIGHT_NOWRAP, [self numericArg])];
 }*/
 
-- (XVimEvaluator*)L{
+/*- (XVimEvaluator*)L{
     return [self _motionFixed:XVIM_MAKE_MOTION(MOTION_BOTTOM, LINEWISE, MOTION_OPTION_NONE, [self numericArg])];
-}
+}*/
 
 - (XVimEvaluator*)M{
     return [self _motionFixed:XVIM_MAKE_MOTION(MOTION_MIDDLE, LINEWISE, MOTION_OPTION_NONE, [self numericArg])];
@@ -614,6 +614,14 @@
   return nil;
 }
 
+- (XVimEvaluator*)L{
+  XVimMotion* motion = XVIM_MAKE_MOTION(MOTION_END_OF_WORD_FORWARD, CHARACTERWISE_INCLUSIVE, MOTION_OPTION_NONE, [self numericArg]);
+  return [self _motionFixed:motion];
+}
+
+- (XVimEvaluator*)J{
+  return [self _motionFixed:XVIM_MAKE_MOTION(MOTION_WORD_BACKWARD, CHARACTERWISE_EXCLUSIVE, MOTION_OPTION_NONE, [self numericArg])];
+}
 
 - (XVimEvaluator*)Up{
     return [self i];
