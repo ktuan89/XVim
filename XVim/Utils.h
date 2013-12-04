@@ -34,5 +34,5 @@ NS_INLINE NSPoint RightTop(NSRect r){
 // You do not need LeftBottom.
 
 @interface Utils : NSObject
-
++ (BOOL) isAlpha:(unichar) ch;
 @end

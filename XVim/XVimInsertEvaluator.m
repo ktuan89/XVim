@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
+#import "Utils.h"
 #import "XVimInsertEvaluator.h"
 #import "XVimWindow.h"
 #import "XVim.h"
@@ -276,8 +277,28 @@
     return [self ESC];
 }
 
-- (XVimEvaluator*)C_c{
+/*- (XVimEvaluator*)C_c{
     return [self ESC];
+}*/
+
+- (XVimEvaluator*)C_c{
+  // TODO: copy the current word into clipboard
+  NSUInteger pos = [[self sourceView] insertionPoint];
+  NSString *str = [[self sourceView] xvim_string];
+  NSUInteger st = pos;
+  if (st > [str length]) return self;
+  if (st > 0 && ![Utils isAlpha:[str characterAtIndex:(NSUInteger)st]]) {
+    --st;
+  }
+  if (![Utils isAlpha: [str characterAtIndex:st]]) return self;
+  NSUInteger en = st;
+  while (st > 0 && [Utils isAlpha:[str characterAtIndex:(st-1)]]) --st;
+  while (en + 1 < [str length] && [Utils isAlpha:[str characterAtIndex:(en + 1)]]) ++en;
+  NSPasteboard *pb = [NSPasteboard generalPasteboard];
+  NSArray *types = [NSArray     arrayWithObjects:NSStringPboardType, nil];
+  [pb declareTypes:types owner:self];
+  [pb setString: [str substringWithRange:NSMakeRange(st, en - st + 1)] forType:NSStringPboardType];
+  return self;
 }
 
 - (void)C_yC_eHelper:(BOOL)handlingC_y {

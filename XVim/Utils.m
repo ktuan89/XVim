@@ -10,5 +10,7 @@
 
 
 @implementation Utils
-
++ (BOOL)isAlpha:(unichar)ch {
+  return (ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z') || ch == '_';
+}
 @end
