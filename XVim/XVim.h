@@ -94,5 +94,6 @@ extern NSString * const XVimDocumentPathKey;
 - (void)writeToConsole:(NSString*)fmt, ...;
 
 - (void)ringBell;
+- (NSString*)documentAtPosition:(int)pos;
 
 @end

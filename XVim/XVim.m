@@ -48,6 +48,8 @@ NSString * const XVimDocumentPathKey = @"XVimDocumentPathKey";
 	XVimHistoryHandler *_searchHistory;
 	XVimKeymap* _keymaps[XVIM_MODE_COUNT];
     NSFileHandle* _logFile;
+  NSString* __fileList[10];
+  int __nfiles;
 }
 @property (strong,nonatomic) XVimRegisterManager* registerManager;
 @property (strong,nonatomic) XVimMutableString* lastOperationCommands;
@@ -171,7 +173,8 @@ NSString * const XVimDocumentPathKey = @"XVimDocumentPathKey";
     _searcher = [[XVimSearch alloc] init];
     _lastCharacterSearchMotion = nil;
     _marks = [[XVimMarks alloc] init];
-    
+    __nfiles = 0;
+
     self.excmd = [[[XVimExCommand alloc] init] autorelease];
     self.lastPlaybackRegister = nil;
     self.registerManager = [[[XVimRegisterManager alloc] init] autorelease];
@@ -225,9 +228,19 @@ NSString * const XVimDocumentPathKey = @"XVimDocumentPathKey";
         
         if (documentPath != nil) {
             NSDictionary *userInfo = [NSDictionary dictionaryWithObject:documentPath forKey:XVimDocumentPathKey];
+            int r = 9;
+            for (int i = 0; i < 10; ++i) if (__fileList[i] != nil && [__fileList[i] isEqualToString:documentPath]) r = i;
+            [__fileList[r] release];
+            for (int i = r; i >= 1; --i) __fileList[i] = __fileList[i - 1];
+            __fileList[0] = [documentPath retain];
             [[NSNotificationCenter defaultCenter] postNotificationName:XVimDocumentChangedNotification object:nil userInfo:userInfo];
         }
     }
+}
+
+- (NSString*)documentAtPosition:(int)pos
+{
+    return __fileList[pos];
 }
     
 - (void)parseRcFile {

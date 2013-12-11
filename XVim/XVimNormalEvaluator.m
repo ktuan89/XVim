@@ -7,6 +7,7 @@
 //
 
 
+#import "IDEKit.h"
 #import "Utils.h"
 #import "XVimEvaluator.h"
 #import "XVimNormalEvaluator.h"
@@ -517,6 +518,28 @@
 - (XVimEvaluator*)motionFixed:(XVimMotion *)motion{
     [[self sourceView] xvim_move:motion];
     return nil;
+}
+
+- (XVimEvaluator*)D_NUM1{
+    NSString *docPath = [[XVim instance] documentAtPosition:1];
+    if(![docPath isEqualToString:self.sourceView.documentURL.path] && docPath != nil){
+        IDEDocumentController* ctrl = [IDEDocumentController sharedDocumentController];
+        NSError* error;
+        NSURL* doc = [NSURL fileURLWithPath:docPath];
+        [ctrl openDocumentWithContentsOfURL:doc display:YES error:&error];
+    }
+    return self;
+}
+
+- (XVimEvaluator*)D_NUM2{
+    NSString *docPath = [[XVim instance] documentAtPosition:2];
+    if(![docPath isEqualToString:self.sourceView.documentURL.path] && docPath != nil){
+        IDEDocumentController* ctrl = [IDEDocumentController sharedDocumentController];
+        NSError* error;
+        NSURL* doc = [NSURL fileURLWithPath:docPath];
+        [ctrl openDocumentWithContentsOfURL:doc display:YES error:&error];
+    }
+    return self;
 }
 
 @end
