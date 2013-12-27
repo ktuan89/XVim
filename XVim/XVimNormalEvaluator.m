@@ -520,25 +520,49 @@
     return nil;
 }
 
-- (XVimEvaluator*)D_NUM1{
-    NSString *docPath = [[XVim instance] documentAtPosition:1];
+- (void)openDocWithPath:(NSString*)docPath
+{
     if(![docPath isEqualToString:self.sourceView.documentURL.path] && docPath != nil){
         IDEDocumentController* ctrl = [IDEDocumentController sharedDocumentController];
         NSError* error;
         NSURL* doc = [NSURL fileURLWithPath:docPath];
         [ctrl openDocumentWithContentsOfURL:doc display:YES error:&error];
     }
+}
+
+- (XVimEvaluator*)D_NUM1{
+    NSString *docPath = [[XVim instance] documentAtPosition:1];
+    [self openDocWithPath:docPath];
     return self;
 }
 
 - (XVimEvaluator*)D_NUM2{
     NSString *docPath = [[XVim instance] documentAtPosition:2];
-    if(![docPath isEqualToString:self.sourceView.documentURL.path] && docPath != nil){
-        IDEDocumentController* ctrl = [IDEDocumentController sharedDocumentController];
-        NSError* error;
-        NSURL* doc = [NSURL fileURLWithPath:docPath];
-        [ctrl openDocumentWithContentsOfURL:doc display:YES error:&error];
-    }
+    [self openDocWithPath:docPath];
+    return self;
+}
+
+- (XVimEvaluator*)D_NUM3{
+    NSString *docPath = [[XVim instance] documentAtPosition:3];
+    [self openDocWithPath:docPath];
+    return self;
+}
+
+- (XVimEvaluator*)D_NUM4{
+    NSString *docPath = [[XVim instance] documentAtPosition:4];
+    [self openDocWithPath:docPath];
+    return self;
+}
+
+- (XVimEvaluator*)D_NUM5{
+    NSString *docPath = [[XVim instance] documentAtPosition:5];
+    [self openDocWithPath:docPath];
+    return self;
+}
+
+- (XVimEvaluator*)D_NUM6{
+    NSString *docPath = [[XVim instance] documentAtPosition:6];
+    [self openDocWithPath:docPath];
     return self;
 }
 

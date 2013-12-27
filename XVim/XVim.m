@@ -228,11 +228,13 @@ NSString * const XVimDocumentPathKey = @"XVimDocumentPathKey";
         
         if (documentPath != nil) {
             NSDictionary *userInfo = [NSDictionary dictionaryWithObject:documentPath forKey:XVimDocumentPathKey];
-            int r = 9;
-            for (int i = 0; i < 10; ++i) if (__fileList[i] != nil && [__fileList[i] isEqualToString:documentPath]) r = i;
-            [__fileList[r] release];
-            for (int i = r; i >= 1; --i) __fileList[i] = __fileList[i - 1];
-            __fileList[0] = [documentPath retain];
+            if (![documentPath isEqualToString:@""]) {
+                int r = 9;
+                for (int i = 0; i < 10; ++i) if (__fileList[i] != nil && [__fileList[i] isEqualToString:documentPath]) r = i;
+                [__fileList[r] release];
+                for (int i = r; i >= 1; --i) __fileList[i] = __fileList[i - 1];
+                __fileList[0] = [documentPath retain];
+            }
             [[NSNotificationCenter defaultCenter] postNotificationName:XVimDocumentChangedNotification object:nil userInfo:userInfo];
         }
     }
