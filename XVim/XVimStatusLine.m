@@ -15,7 +15,7 @@
 #import "XVim.h"
 #import "XVimOptions.h"
 
-#define STATUS_LINE_HEIGHT 18 
+#define STATUS_LINE_HEIGHT 20
 
 @interface XVimStatusLine ()
 
@@ -26,6 +26,7 @@
 @implementation XVimStatusLine{
     DVTChooserView* _background;
     NSInsetTextView* _status;
+    NSInsetTextView* _doclist;
 }
 
 - (id)initWithFrame:(NSRect)frame
@@ -38,10 +39,15 @@
         _status = [[NSInsetTextView alloc] initWithFrame:NSMakeRect(0, 0, 0, STATUS_LINE_HEIGHT)];
         _status.backgroundColor = [NSColor clearColor];
         [_status setEditable:NO];
+        _doclist = [[NSInsetTextView alloc] initWithFrame:NSMakeRect(0, STATUS_LINE_HEIGHT, 0, STATUS_LINE_HEIGHT)];
+        _doclist.backgroundColor = [NSColor clearColor];
+        [_doclist setEditable:NO];
+        [_doclist setString:@""];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_documentChangedNotification:) name:XVimDocumentChangedNotification object:nil];
         
         [self addSubview:_background];
+        [self addSubview:_doclist];
         [self addSubview:_status];
     }
     
@@ -54,6 +60,7 @@
     
     [_background release];
     [_status release];
+    [_doclist release];
     [super dealloc];
 }
 
@@ -70,16 +77,19 @@
     XVimOptions* options = [[XVim instance] options];
     CGFloat height;
     if( options.laststatus == 2 ){
-        height = STATUS_LINE_HEIGHT;
+        height = 2 * STATUS_LINE_HEIGHT;
     } else {
         height = 0;
     }
     NSRect parentRect = [container frame];
     [self setFrame:NSMakeRect(0, 0, parentRect.size.width, height)];
-    [_background setFrame:NSMakeRect(0, 0, parentRect.size.width, STATUS_LINE_HEIGHT)];
+    [_background setFrame:NSMakeRect(0, 0, parentRect.size.width, 2 * STATUS_LINE_HEIGHT)];
     [_status setFrame:NSMakeRect(0, 0, parentRect.size.width, STATUS_LINE_HEIGHT)];
 	[_status setFont:sourceFont];
 	[_status setInset:inset];
+    [_doclist setFrame:NSMakeRect(0, STATUS_LINE_HEIGHT, parentRect.size.width, STATUS_LINE_HEIGHT)];
+    [_doclist setFont:sourceFont];
+    [_doclist setInset:inset];
     // This is heuristic way...
     if( [NSStringFromClass([container class]) isEqualToString:@"IDEComparisonEditorAutoLayoutView"] ){
         // Nothing ( Maybe AutoLayout view does the job "automatically")
@@ -104,6 +114,19 @@
     if (documentPath != nil) {
         [_status setString:documentPath];
     }
+
+    NSString *docnamelist = @"";
+    for (int i = 1; i < 10; ++i) {
+        NSString *docPath = [[XVim instance] documentAtPosition:i];
+        if (docPath == nil) continue;
+        NSRange range = [docPath rangeOfString:@"/" options:NSBackwardsSearch];
+        if (range.location != NSNotFound) {
+            docnamelist = [docnamelist stringByAppendingString:[NSString stringWithFormat:@"[%d.", i]];
+            docnamelist = [docnamelist stringByAppendingString:[docPath substringFromIndex:(range.location + 1)]];
+            docnamelist = [docnamelist stringByAppendingString:@"]  "];
+        }
+    }
+    [_doclist setString:docnamelist];
 }
 
 - (void)drawRect:(NSRect)dirtyRect
