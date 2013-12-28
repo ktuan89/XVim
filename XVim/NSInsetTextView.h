@@ -10,5 +10,5 @@
 
 @interface NSInsetTextView : NSTextView
 @property CGSize inset;
-
+- (instancetype)initWithFrame:(NSRect)frameRect;
 @end

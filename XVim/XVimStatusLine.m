@@ -43,7 +43,7 @@
         _doclist.backgroundColor = [NSColor clearColor];
         [_doclist setEditable:NO];
         [_doclist setString:@""];
-        
+
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_documentChangedNotification:) name:XVimDocumentChangedNotification object:nil];
         
         [self addSubview:_background];
