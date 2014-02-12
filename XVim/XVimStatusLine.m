@@ -121,8 +121,13 @@
         if (docPath == nil) continue;
         NSRange range = [docPath rangeOfString:@"/" options:NSBackwardsSearch];
         if (range.location != NSNotFound) {
+            NSString *docname = [docPath substringFromIndex:(range.location + 1)];
+            docname = [docname stringByReplacingOccurrencesOfString:@"ViewController" withString:@"VC"];
+            if ([docname hasPrefix:@"FB"]) {
+                docname = [docname substringFromIndex:2];
+            }
             docnamelist = [docnamelist stringByAppendingString:[NSString stringWithFormat:@"[%d.", i]];
-            docnamelist = [docnamelist stringByAppendingString:[docPath substringFromIndex:(range.location + 1)]];
+            docnamelist = [docnamelist stringByAppendingString:docname];
             docnamelist = [docnamelist stringByAppendingString:@"]  "];
         }
     }
