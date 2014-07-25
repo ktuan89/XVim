@@ -179,7 +179,7 @@ static Logger* s_defaultLogger = nil;
 }
 
 + (void) logAvailableClasses:(LogLevel)l{
-    int numClasses;
+    /*int numClasses;
     Class * classes = NULL;
     
     numClasses = objc_getClassList(NULL, 0);
@@ -217,7 +217,7 @@ static Logger* s_defaultLogger = nil;
             [text setString:@""];
         }
         free(classes);
-    }
+    }*/
 }
 
 + (void) traceViewInfoImpl:(NSView*)obj subView:(BOOL)sub prefix:(NSString*)pre{

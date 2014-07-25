@@ -803,7 +803,7 @@
 		A2B4BAAF14D59F6600D817B0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0510;
 			};
 			buildConfigurationList = A2B4BAB214D59F6600D817B0 /* Build configuration list for PBXProject "XVim" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1031,7 +1031,6 @@
 					"$(SYSTEM_APPS_DIR)/Xcode\\ 2.app/Contents/Frameworks",
 					"$(SYSTEM_APPS_DIR)/Xcode\\ 2.app/Contents/SharedFrameworks",
 				);
-				GCC_ENABLE_OBJC_GC = supported;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "XVim/XVim-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1058,7 +1057,6 @@
 					"$(SYSTEM_APPS_DIR)/Xcode\\ 2.app/Contents/Frameworks",
 					"$(SYSTEM_APPS_DIR)/Xcode\\ 2.app/Contents/SharedFrameworks",
 				);
-				GCC_ENABLE_OBJC_GC = supported;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "XVim/XVim-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "XVIM_XCODE_VERSION=5";
@@ -1156,7 +1154,6 @@
 					"$(SYSTEM_APPS_DIR)/Xcode\\ 2.app/Contents/Frameworks",
 					"$(SYSTEM_APPS_DIR)/Xcode\\ 2.app/Contents/SharedFrameworks",
 				);
-				GCC_ENABLE_OBJC_GC = supported;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "XVim/XVim-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1183,7 +1180,6 @@
 					"$(SYSTEM_APPS_DIR)/Xcode\\ 2.app/Contents/Frameworks",
 					"$(SYSTEM_APPS_DIR)/Xcode\\ 2.app/Contents/SharedFrameworks",
 				);
-				GCC_ENABLE_OBJC_GC = supported;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "XVim/XVim-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "XVIM_XCODE_VERSION=4";

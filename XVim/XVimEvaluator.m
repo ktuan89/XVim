@@ -25,7 +25,10 @@
 static XVimEvaluator* _invalidEvaluator = nil;
 static XVimEvaluator* _noOperationEvaluator = nil;
 
-@implementation XVimEvaluator
+@implementation XVimEvaluator {
+  NSUInteger _numericArg;
+  NSString *_yankRegister;
+}
 
 + (XVimEvaluator*)invalidEvaluator{
    	if(_invalidEvaluator){
@@ -182,6 +185,13 @@ static XVimEvaluator* _noOperationEvaluator = nil;
     }
 }
 
+- (void)setYankRegister:(NSString *)yankRegister
+{
+  [yankRegister retain];
+  [_yankRegister release];
+  _yankRegister = yankRegister;
+}
+
 - (void)resetNumericArg{
     _numericArg = 1;
     if( self.parent != nil ){
@@ -198,6 +208,11 @@ static XVimEvaluator* _noOperationEvaluator = nil;
     }else{
         return [self.parent numericArg] * _numericArg;
     }
+}
+
+- (void)setNumericArg:(NSUInteger)numericArg
+{
+  _numericArg = numericArg;
 }
 
 - (void)textView:(NSTextView*)view didYank:(NSString*)yankedText withType:(TEXT_TYPE)type{

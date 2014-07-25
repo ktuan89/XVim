@@ -12,6 +12,7 @@
 @interface XVimOptions() {
 @private
     NSDictionary* _option_maps;
+  BOOL _number;
 }
 @end
 
@@ -105,6 +106,11 @@
     [[IDEApplicationController sharedAppController] _currentPreferenceSetChanged];
     */
     
+}
+
+- (BOOL)number
+{
+  return _number;
 }
 
 // Helper Methods

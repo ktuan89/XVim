@@ -138,7 +138,7 @@ XVimMotionEvaluator
 - (void)resetNumericArg;
 
 // Returns the context numeric arguments multiplied together
-- (NSUInteger)numericArg;
+// - (NSUInteger)numericArg;
 
 - (BOOL)numericMode;
 
