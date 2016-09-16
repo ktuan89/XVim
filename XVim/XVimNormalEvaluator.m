@@ -39,9 +39,10 @@
 #import "XVimTildeEvaluator.h"
 #import "NSTextView+VimOperation.h"
 #import "XVimJoinEvaluator.h"
+#import "XVimUtil.h"
 
 @interface XVimNormalEvaluator() {
-	__weak XVimRegister *_playbackRegister;
+	//__weak XVimRegister *_playbackRegister;
 }
 @end
 
@@ -523,10 +524,11 @@
 - (void)openDocWithPath:(NSString*)docPath
 {
     if(![docPath isEqualToString:self.sourceView.documentURL.path] && docPath != nil){
-        IDEDocumentController* ctrl = [IDEDocumentController sharedDocumentController];
-        NSError* error;
-        NSURL* doc = [NSURL fileURLWithPath:docPath];
-        [ctrl openDocumentWithContentsOfURL:doc display:YES error:&error];
+      NSError* error;
+      NSURL* doc = [NSURL fileURLWithPath:docPath];
+      DVTDocumentLocation* loc = [[DVTDocumentLocation alloc] initWithDocumentURL:doc timestamp:nil];
+      IDEEditorOpenSpecifier* spec = [IDEEditorOpenSpecifier structureEditorOpenSpecifierForDocumentLocation:loc inWorkspace:[XVimLastActiveWorkspaceTabController() workspace] error:&error];
+      [XVimLastActiveEditorArea() _openEditorOpenSpecifier:spec editorContext:[XVimLastActiveEditorArea() lastActiveEditorContext] takeFocus:YES];
     }
 }
 

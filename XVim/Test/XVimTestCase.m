@@ -44,11 +44,11 @@
     test.expectedText = et;
     test.expectedRange = er;
     test.message = @"";
-    if( nil != desc ){
+    /*if( nil != desc ){
         test.description = desc;
     }else{
         test.description = in;
-    }
+    }*/
     
     return test;
 }

@@ -20,6 +20,7 @@
 #import "XVimMarks.h"
 #import "XVimNormalEvaluator.h"
 #import "NSTextView+VimOperation.h"
+#import "XVimUtil.h"
 
 @interface XVimInsertEvaluator()
 @property (nonatomic) NSRange startRange;
@@ -369,10 +370,11 @@
 - (void)openDocWithPath:(NSString*)docPath
 {
     if(![docPath isEqualToString:self.sourceView.documentURL.path] && docPath != nil){
-        IDEDocumentController* ctrl = [IDEDocumentController sharedDocumentController];
         NSError* error;
         NSURL* doc = [NSURL fileURLWithPath:docPath];
-        [ctrl openDocumentWithContentsOfURL:doc display:YES error:&error];
+        DVTDocumentLocation* loc = [[DVTDocumentLocation alloc] initWithDocumentURL:doc timestamp:nil];
+        IDEEditorOpenSpecifier* spec = [IDEEditorOpenSpecifier structureEditorOpenSpecifierForDocumentLocation:loc inWorkspace:[XVimLastActiveWorkspaceTabController() workspace] error:&error];
+        [XVimLastActiveEditorArea() _openEditorOpenSpecifier:spec editorContext:[XVimLastActiveEditorArea() lastActiveEditorContext] takeFocus:YES];
     }
 }
 

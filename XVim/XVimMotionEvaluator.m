@@ -24,6 +24,7 @@
 #import "XVimMarks.h"
 #import "XVimCommandLineEvaluator.h"
 #import "XVimOptions.h"
+#import "XVimUtil.h"
 
 
 ////////////////////////////////
@@ -359,10 +360,13 @@
     }
     
     if( ![mark.document isEqualToString:self.sourceView.documentURL.path]){
-        IDEDocumentController* ctrl = [IDEDocumentController sharedDocumentController];
+        // IDEDocumentController* ctrl = [IDEDocumentController sharedDocumentController];
         NSError* error;
         NSURL* doc = [NSURL fileURLWithPath:mark.document];
-        [ctrl openDocumentWithContentsOfURL:doc display:YES error:&error];
+        // [ctrl openDocumentWithContentsOfURL:doc display:YES error:&error];
+        DVTDocumentLocation* loc = [[DVTDocumentLocation alloc] initWithDocumentURL:doc timestamp:nil];
+        IDEEditorOpenSpecifier* spec = [IDEEditorOpenSpecifier structureEditorOpenSpecifierForDocumentLocation:loc inWorkspace:[XVimLastActiveWorkspaceTabController() workspace] error:&error];
+        [XVimLastActiveEditorArea() _openEditorOpenSpecifier:spec editorContext:[XVimLastActiveEditorArea() lastActiveEditorContext] takeFocus:YES];
     }
     
     NSUInteger to = [self.sourceView.textStorage positionAtLineNumber:mark.line column:mark.column];

@@ -29,7 +29,7 @@
 @property(strong) NSString* input;
 @property(strong) NSString* expectedText;
 @property         NSRange   expectedRange;
-@property(strong) NSString* description;
+// @property(strong,readonly) NSString* description;
 @property(strong) NSString* message;
 @property         BOOL      success;
 
